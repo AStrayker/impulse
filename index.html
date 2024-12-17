@@ -4,7 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impulse - Магазин одежды</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Общие стили */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Боковое меню */
+        .sidebar {
+            position: fixed;
+            right: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: #fff;
+            transition: right 0.3s ease;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin: 1rem 0;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        /* Кнопка меню */
+        .menu-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 1001;
+        }
+
+        /* Контент страницы */
+        main {
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Поиск */
+        .search-container {
+            text-align: center;
+            margin: 2rem;
+        }
+
+        #search-input {
+            padding: 0.5rem;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .suggestions {
+            list-style: none;
+            padding: 0;
+            max-width: 400px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+
+        .suggestions li {
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .suggestions li:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
     <!-- Боковое мобильное меню -->
@@ -27,9 +121,48 @@
         <ul id="suggestions" class="suggestions"></ul>
     </div>
 
-    <!-- Скрипты -->
-    <script src="firebase-config.js"></script>
-    <script src="firebase-data.js"></script>
-    <script src="app.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Открытие и закрытие меню
+        const menuToggle = document.getElementById("menu-toggle");
+        const sidebar = document.getElementById("sidebar");
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
+
+        // Заглушки для меню и контента
+        const menuData = ["Главная", "Мужская одежда", "Женская одежда", "Аксессуары", "Контакты"];
+        const pageData = "Добро пожаловать в Impulse! У нас вы найдете стильную мужскую и женскую одежду, а также модные аксессуары. Следите за новинками и акциями на сайте.";
+
+        // Загрузка меню
+        const menuItems = document.getElementById("menu-items");
+        menuData.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="#">${item}</a>`;
+            menuItems.appendChild(li);
+        });
+
+        // Загрузка контента
+        const pageContent = document.getElementById("page-content");
+        pageContent.innerText = pageData;
+
+        // Поиск с подсказками
+        const searchInput = document.getElementById("search-input");
+        const suggestionsBox = document.getElementById("suggestions");
+
+        searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase();
+            suggestionsBox.innerHTML = ""; // Очищаем предыдущие подсказки
+
+            const words = pageData.split(" ");
+            const suggestions = words.filter(word => word.toLowerCase().includes(query)).slice(0, 5);
+
+            suggestions.forEach(suggestion => {
+                const li = document.createElement("li");
+                li.textContent = suggestion;
+                suggestionsBox.appendChild(li);
+            });
+        });
+    </script>
 </body>
 </html>
