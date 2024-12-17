@@ -4,165 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impulse - Магазин одежды</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         /* Общие стили */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
 
-        h1 {
-            text-align: center;
-        }
+        /* Контейнер */
+        .container { display: flex; height: 100vh; }
 
         /* Боковое меню */
         .sidebar {
-            position: fixed;
-            right: -250px;
-            top: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            color: #fff;
-            transition: right 0.3s ease;
-            padding: 1rem;
-            z-index: 1000;
+            width: 200px; background-color: #ffffff; border-right: 1px solid #ddd;
+            display: flex; flex-direction: column; height: 100vh; overflow-y: auto;
+            position: fixed; left: -200px; transition: left 0.3s ease; z-index: 1000;
         }
+        .sidebar.active { left: 0; }
+        .logo { font-size: 24px; font-weight: bold; padding: 20px; text-align: center; background-color: #F37021; color: white; }
+        .menu { list-style: none; padding: 20px 0; }
+        .menu li { padding: 10px 20px; }
+        .menu li a { text-decoration: none; color: black; font-size: 16px; display: block; }
+        .menu li a:hover { background-color: #e0e0e0; }
 
-        .sidebar.open {
-            right: 0;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar li {
-            margin: 1rem 0;
-        }
-
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        /* Кнопка меню */
-        .menu-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            z-index: 1001;
-        }
-
-        /* Контент страницы */
-        main {
-            padding: 2rem;
-            margin-top: 2rem;
-        }
+        /* Контент */
+        .content { flex: 1; margin-left: 200px; padding: 20px; transition: margin-left 0.3s; }
+        .content.fullscreen { margin-left: 0; }
+        .header { font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 
         /* Поиск */
-        .search-container {
-            text-align: center;
-            margin: 2rem;
-        }
-
-        #search-input {
-            padding: 0.5rem;
-            width: 80%;
-            max-width: 400px;
-        }
-
+        .search-container { display: flex; position: relative; margin-left: auto; }
+        .search-bar { padding: 8px; width: 200px; }
         .suggestions {
-            list-style: none;
-            padding: 0;
-            max-width: 400px;
-            margin: 0 auto;
-            background: #f9f9f9;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd; max-height: 100px; overflow-y: auto; background: white;
+            position: absolute; width: 200px; top: 38px; display: none; z-index: 1000;
         }
+        .suggestions div { padding: 8px; cursor: pointer; }
+        .suggestions div:hover { background-color: #f0f0f0; }
 
-        .suggestions li {
-            padding: 0.5rem;
-            cursor: pointer;
-        }
-
-        .suggestions li:hover {
-            background-color: #ddd;
+        /* Мобильные стили */
+        @media (max-width: 768px) {
+            .content { margin-left: 0; }
+            .menu-toggle { position: fixed; top: 10px; left: 10px; cursor: pointer; font-size: 30px; z-index: 1100; }
+            .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none; z-index: 999; }
+            .overlay.active { display: block; }
         }
     </style>
 </head>
 <body>
-    <!-- Боковое мобильное меню -->
-    <nav id="sidebar" class="sidebar">
-        <ul id="menu-items"></ul>
-    </nav>
+    <!-- Затемняющий фон -->
+    <div class="overlay"></div>
 
-    <!-- Кнопка для открытия мобильного меню -->
-    <button id="menu-toggle" class="menu-toggle">☰</button>
+    <!-- Контейнер -->
+    <div class="container">
+        <!-- Боковое меню -->
+        <nav class="sidebar">
+            <div class="logo">Impulse</div>
+            <ul class="menu" id="menu-list">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Мужская одежда</a></li>
+                <li><a href="#">Женская одежда</a></li>
+                <li><a href="#">Аксессуары</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
 
-    <!-- Основной контент страницы -->
-    <main id="content">
-        <h1>Impulse - Магазин одежды</h1>
-        <div id="page-content">Загрузка...</div>
-    </main>
-
-    <!-- Поиск по сайту -->
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Поиск по сайту...">
-        <ul id="suggestions" class="suggestions"></ul>
+        <!-- Основной контент -->
+        <div class="content">
+            <div class="header">
+                Категории
+                <div class="search-container">
+                    <input type="text" id="search" class="search-bar" placeholder="Поиск по сайту...">
+                    <div class="suggestions" id="suggestions"></div>
+                </div>
+            </div>
+            <div id="content-area">
+                <p>Загрузка контента...</p>
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Кнопка для мобильного меню -->
+    <div class="menu-toggle">☰</div>
+
+    <!-- Скрипты -->
     <script>
-        // Открытие и закрытие меню
-        const menuToggle = document.getElementById("menu-toggle");
-        const sidebar = document.getElementById("sidebar");
-        menuToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("open");
+        // Мобильное меню
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = document.querySelector('.menu-toggle');
+        const overlay = document.querySelector('.overlay');
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
         });
-
-        // Заглушки для меню и контента
-        const menuData = ["Главная", "Мужская одежда", "Женская одежда", "Аксессуары", "Контакты"];
-        const pageData = "Добро пожаловать в Impulse! У нас вы найдете стильную мужскую и женскую одежду, а также модные аксессуары. Следите за новинками и акциями на сайте.";
-
-        // Загрузка меню
-        const menuItems = document.getElementById("menu-items");
-        menuData.forEach(item => {
-            const li = document.createElement("li");
-            li.innerHTML = `<a href="#">${item}</a>`;
-            menuItems.appendChild(li);
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
         });
-
-        // Загрузка контента
-        const pageContent = document.getElementById("page-content");
-        pageContent.innerText = pageData;
 
         // Поиск с подсказками
-        const searchInput = document.getElementById("search-input");
-        const suggestionsBox = document.getElementById("suggestions");
+        const searchInput = document.getElementById('search');
+        const suggestionsBox = document.getElementById('suggestions');
+        const searchData = ["Футболка", "Джинсы", "Куртка", "Пальто", "Платье", "Кроссовки", "Сумка", "Шапка"];
 
-        searchInput.addEventListener("input", (e) => {
-            const query = e.target.value.toLowerCase();
-            suggestionsBox.innerHTML = ""; // Очищаем предыдущие подсказки
-
-            const words = pageData.split(" ");
-            const suggestions = words.filter(word => word.toLowerCase().includes(query)).slice(0, 5);
-
-            suggestions.forEach(suggestion => {
-                const li = document.createElement("li");
-                li.textContent = suggestion;
-                suggestionsBox.appendChild(li);
-            });
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            suggestionsBox.innerHTML = '';
+            if (query) {
+                const filtered = searchData.filter(item => item.toLowerCase().includes(query));
+                filtered.forEach(item => {
+                    const div = document.createElement('div');
+                    div.textContent = item;
+                    div.onclick = () => {
+                        searchInput.value = item;
+                        suggestionsBox.style.display = 'none';
+                    };
+                    suggestionsBox.appendChild(div);
+                });
+                suggestionsBox.style.display = 'block';
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
         });
+
+        searchInput.addEventListener('blur', () => {
+            setTimeout(() => suggestionsBox.style.display = 'none', 200);
+        });
+
+        // Контент
+        document.getElementById('content-area').innerHTML = `
+            <h2>Добро пожаловать в Impulse!</h2>
+            <p>Здесь вы найдете модную и качественную одежду для мужчин и женщин. 
+            Просматривайте категории и выбирайте стильные новинки!</p>
+        `;
     </script>
 </body>
 </html>
