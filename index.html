@@ -1,28 +1,185 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Інтернет-магазин одягу</title>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет магазин</title>
+    <style>
+        /* Общие стили */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Стили для ПК версии */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .menu {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding-top: 50px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: left 0.3s ease;
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 15px 25px;
+            border-bottom: 1px solid #444;
+        }
+
+        .menu li:hover {
+            background-color: #555;
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-left: 250px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .logo {
+            font-size: 2em;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .main-content {
+            text-align: center;
+        }
+
+        /* Стили для мобильной версии */
+        @media (max-width: 768px) {
+            .menu {
+                left: -100%;
+                width: 50%; /* Ширина меню на половину экрана */
+                height: 100vh; /* Высота меню на весь экран */
+                background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+                z-index: 99;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                transition: left 0.3s ease;
+            }
+
+            .menu.active {
+                left: 0;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .hamburger {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background-color: transparent;
+                border: none;
+                z-index: 100;
+                cursor: pointer;
+            }
+
+            .hamburger div {
+                width: 35px;
+                height: 5px;
+                background-color: #333;
+                margin: 6px 0;
+                transition: transform 0.3s ease;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: translateY(11px) rotate(45deg);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: translateY(-11px) rotate(-45deg);
+            }
+
+            .logo {
+                font-size: 1.5em;
+                margin-top: 10px;
+            }
+
+            .main-content {
+                margin-top: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Шапка -->
-  <header>
-    <div class="logo">Impulse</div>
-    <nav class="menu"></nav>
-  </header>
+    <div class="container">
+        <!-- Меню -->
+        <div class="menu" id="menu">
+            <ul>
+                <li>Главная</li>
+                <li>Каталог</li>
+                <li>О нас</li>
+                <li>Контакты</li>
+            </ul>
+        </div>
 
-  <!-- Контент -->
-  <main>
-    <h1>Ласкаво просимо до Impulse</h1>
-    <div class="products"></div>
-  </main>
+        <!-- Контент -->
+        <div class="content" id="content">
+            <!-- Гамбургер-меню для мобильной версии -->
+            <button class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
 
-  <!-- Подключаем скрипты -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
-  <script src="js/firebase-config.js"></script>
-  <script src="js/load-menu.js"></script>
-  <script src="js/load-products.js"></script>
+            <div class="main-content">
+                <div class="logo">
+                    Логотип магазина
+                </div>
+                <p>Добро пожаловать в наш интернет-магазин!</p>
+                <p>Мы предлагаем самые лучшие товары.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        const content = document.getElementById('content');
+
+        // Открыть/закрыть меню при нажатии на гамбургер
+        hamburger.addEventListener('click', function() {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Закрыть меню при нажатии на основную часть сайта
+        content.addEventListener('click', function(event) {
+            if (menu.classList.contains('active') && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
