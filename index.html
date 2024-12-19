@@ -33,7 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 3px 15px; /* Уменьшаем отступы сверху */
+            padding: 2px 15px; /* Уменьшаем отступы сверху */
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
@@ -52,7 +52,7 @@
         }
 
         .header .logo-container img {
-            width: 40px; /* Уменьшаем размер логотипа */
+            width: 35px; /* Уменьшаем размер логотипа */
             height: auto;
             margin-right: 8px;
             transition: width 0.3s ease;
@@ -78,8 +78,8 @@
         }
 
         .header .contacts .social-icons a {
-            margin-left: 10px;
-            font-size: 18px; /* Уменьшаем размер иконок */
+            margin-left: 8px; /* Уменьшаем отступы между иконками */
+            font-size: 16px; /* Уменьшаем размер иконок */
             color: #333;
             text-decoration: none;
         }
@@ -94,7 +94,7 @@
 
         /* Меню */
         .sidebar-pc {
-            width: 200px; /* Уменьшаем ширину меню */
+            width: 180px; /* Уменьшаем ширину меню */
             background-color: white;
             border-right: 1px solid #ddd;
             padding-top: 20px;
@@ -111,7 +111,7 @@
         }
 
         .sidebar-pc li {
-            padding: 12px;
+            padding: 10px;
             text-align: center;
         }
 
@@ -163,8 +163,8 @@
         /* Стиль для кнопки меню */
         .menu-btn {
             position: fixed;
-            top: 15px;
-            left: 15px;
+            top: 10px;
+            left: 10px;
             font-size: 30px;
             cursor: pointer;
             z-index: 2000;
@@ -193,11 +193,11 @@
             }
 
             .header {
-                padding: 3px 15px; /* Уменьшаем отступы на мобильных устройствах */
+                padding: 2px 15px; /* Уменьшаем отступы на мобильных устройствах */
             }
 
             .header .logo-container img {
-                width: 35px; /* Уменьшаем размер логотипа */
+                width: 30px; /* Уменьшаем размер логотипа */
             }
 
             .header .logo-container .logo-text {
@@ -205,7 +205,8 @@
             }
 
             .header .contacts .social-icons a {
-                font-size: 16px; /* Уменьшаем размер иконок соц.сетей */
+                font-size: 14px; /* Уменьшаем размер иконок соц.сетей */
+                margin-left: 5px; /* Уменьшаем отступы */
             }
         }
 
@@ -220,7 +221,7 @@
             }
 
             .main-content {
-                margin-left: 200px; /* Измененная ширина меню */
+                margin-left: 180px; /* Измененная ширина меню */
             }
 
             .header .logo-container {
@@ -231,7 +232,7 @@
             }
 
             .header .logo-container img {
-                width: 40px; /* Возвращаем исходный размер логотипа */
+                width: 35px; /* Возвращаем размер логотипа */
             }
 
             .header .logo-container .logo-text {
@@ -239,7 +240,7 @@
             }
 
             .header .contacts .social-icons a {
-                font-size: 18px; /* Возвращаем размер иконок соц.сетей */
+                font-size: 16px; /* Возвращаем размер иконок соц.сетей */
             }
         }
 
