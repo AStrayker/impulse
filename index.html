@@ -33,7 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px 15px; /* Уменьшаем отступы */
+            padding: 3px 15px; /* Уменьшаем отступы сверху */
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
@@ -48,6 +48,7 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
+            transition: top 0.3s ease;
         }
 
         .header .logo-container img {
@@ -179,7 +180,7 @@
             .header .logo-container {
                 position: absolute;
                 left: 15px;
-                top: 50%;
+                top: 55%; /* Опускаем логотип ниже */
                 transform: translateY(-50%);
             }
 
@@ -192,7 +193,7 @@
             }
 
             .header {
-                padding: 5px 15px; /* Уменьшаем отступы на мобильных устройствах */
+                padding: 3px 15px; /* Уменьшаем отступы на мобильных устройствах */
             }
 
             .header .logo-container img {
@@ -225,6 +226,8 @@
             .header .logo-container {
                 position: static; /* Логотип в нормальном положении */
                 margin-left: 0;
+                top: 50%; /* Возвращаем в центр */
+                transform: translateY(-50%);
             }
 
             .header .logo-container img {
