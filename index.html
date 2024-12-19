@@ -24,8 +24,8 @@
         /* Контейнер для основной структуры */
         .container {
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
+            flex-direction: column;
         }
 
         /* Шапка сайта */
@@ -33,19 +33,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 20px;
+            padding: 15px 20px;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
             z-index: 1000;
-            transition: padding 0.3s ease, height 0.3s ease;
+            transition: padding 0.3s ease;
         }
 
-        /* Логотип и текст */
         .header .logo-container {
             display: flex;
             align-items: center;
-            transition: font-size 0.3s ease, margin-left 0.3s ease;
         }
 
         .header .logo-container img {
@@ -63,7 +60,6 @@
             transition: font-size 0.3s ease;
         }
 
-        /* Контакты (правый верхний угол) */
         .header .contacts {
             display: flex;
             flex-direction: column;
@@ -106,7 +102,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 500;
+            z-index: 1000;
         }
 
         .sidebar-pc ul {
@@ -194,7 +190,7 @@
             }
 
             .header {
-                padding: 15px 10px; /* Уменьшаем отступы на маленьких экранах */
+                padding: 10px 15px; /* Уменьшаем отступы на мобильных устройствах */
             }
 
             .header .logo-container img {
@@ -253,16 +249,14 @@
         .phone-panel {
             position: fixed;
             bottom: 10px;
-            right: -100%;
-            width: 300px;
-            height: 60px;
+            left: 0;
+            width: 100%;
             background-color: #007bff;
             color: white;
             text-align: center;
-            line-height: 60px;
+            padding: 10px;
             display: none;
             z-index: 2000;
-            transition: right 0.3s ease;
         }
 
         /* Стиль кнопки телефона */
@@ -387,10 +381,8 @@
             const phonePanel = document.getElementById('phone-panel');
             if (phonePanel.style.display === 'block') {
                 phonePanel.style.display = 'none';
-                phonePanel.style.right = '-100%';
             } else {
                 phonePanel.style.display = 'block';
-                phonePanel.style.right = '0';
             }
         }
 
@@ -400,7 +392,6 @@
             const phoneBtn = document.getElementById('phone-btn');
             if (!phonePanel.contains(event.target) && !phoneBtn.contains(event.target)) {
                 phonePanel.style.display = 'none';
-                phonePanel.style.right = '-100%';
             }
         });
 
