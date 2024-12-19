@@ -15,7 +15,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
@@ -33,53 +32,47 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2px 15px; /* Уменьшаем отступы сверху */
+            padding: 10px 20px;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            position: relative;
-            transition: padding 0.3s ease;
         }
 
         .header .logo-container {
             display: flex;
             align-items: center;
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: top 0.3s ease;
         }
 
         .header .logo-container img {
-            width: 35px; /* Уменьшаем размер логотипа */
+            width: 50px;
             height: auto;
-            margin-right: 8px;
-            transition: width 0.3s ease;
+            margin-right: 10px;
         }
 
         .header .logo-container .logo-text {
-            font-size: 12px; /* Уменьшаем размер шрифта текста */
+            font-size: 16px;
             font-weight: bold;
             line-height: 1.5;
             color: #333;
-            transition: font-size 0.3s ease;
         }
 
         .header .contacts {
             display: flex;
-            align-items: center;
-            justify-content: flex-end; /* Размещаем иконки в правой части */
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .header .contacts .phone {
+            font-size: 16px;
+            color: #333;
         }
 
         .header .contacts .social-icons {
-            display: flex;
-            margin-left: 15px;
+            margin-top: 5px;
         }
 
         .header .contacts .social-icons a {
-            margin-left: 8px; /* Уменьшаем отступы между иконками */
-            font-size: 16px; /* Уменьшаем размер иконок */
+            margin-left: 10px;
+            font-size: 18px;
             color: #333;
             text-decoration: none;
         }
@@ -94,7 +87,7 @@
 
         /* Меню */
         .sidebar-pc {
-            width: 180px; /* Уменьшаем ширину меню */
+            width: 250px;
             background-color: white;
             border-right: 1px solid #ddd;
             padding-top: 20px;
@@ -102,7 +95,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 999;
+            z-index: 1000;
         }
 
         .sidebar-pc ul {
@@ -111,7 +104,7 @@
         }
 
         .sidebar-pc li {
-            padding: 10px;
+            padding: 15px;
             text-align: center;
         }
 
@@ -122,7 +115,7 @@
         .sidebar-pc li a {
             text-decoration: none;
             color: #333;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         /* Мобильная версия меню */
@@ -163,8 +156,8 @@
         /* Стиль для кнопки меню */
         .menu-btn {
             position: fixed;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             font-size: 30px;
             cursor: pointer;
             z-index: 2000;
@@ -178,10 +171,7 @@
             }
 
             .header .logo-container {
-                position: absolute;
-                left: 15px;
-                top: 55%; /* Опускаем логотип ниже */
-                transform: translateY(-50%);
+                margin-left: 60px; /* Сдвиг логотипа вправо от кнопки меню */
             }
 
             .sidebar-pc {
@@ -190,23 +180,6 @@
 
             .main-content {
                 margin-left: 0;
-            }
-
-            .header {
-                padding: 2px 15px; /* Уменьшаем отступы на мобильных устройствах */
-            }
-
-            .header .logo-container img {
-                width: 30px; /* Уменьшаем размер логотипа */
-            }
-
-            .header .logo-container .logo-text {
-                font-size: 10px; /* Уменьшаем размер шрифта для текста логотипа */
-            }
-
-            .header .contacts .social-icons a {
-                font-size: 14px; /* Уменьшаем размер иконок соц.сетей */
-                margin-left: 5px; /* Уменьшаем отступы */
             }
         }
 
@@ -221,27 +194,33 @@
             }
 
             .main-content {
-                margin-left: 180px; /* Измененная ширина меню */
+                margin-left: 250px;
             }
+        }
 
-            .header .logo-container {
-                position: static; /* Логотип в нормальном положении */
-                margin-left: 0;
-                top: 50%; /* Возвращаем в центр */
-                transform: translateY(-50%);
-            }
+        /* Стиль для панели с номером телефона */
+        .phone-panel {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: none;
+            z-index: 2000;
+        }
 
-            .header .logo-container img {
-                width: 35px; /* Возвращаем размер логотипа */
-            }
-
-            .header .logo-container .logo-text {
-                font-size: 12px; /* Исходный размер шрифта текста */
-            }
-
-            .header .contacts .social-icons a {
-                font-size: 16px; /* Возвращаем размер иконок соц.сетей */
-            }
+        /* Стиль кнопки телефона */
+        .phone-btn {
+            font-size: 24px;
+            color: #333;
+            background-color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
         }
 
     </style>
@@ -257,9 +236,7 @@
                 <!-- Логотип и текст будет загружаться динамически -->
             </div>
             <div class="contacts" id="contacts-container">
-                <div class="social-icons">
-                    <!-- Социальные сети будут загружаться динамически -->
-                </div>
+                <!-- Контактные данные и соц.сети будут загружаться динамически -->
             </div>
         </header>
 
@@ -276,6 +253,14 @@
 
         <!-- Кнопка меню (для мобильной версии) -->
         <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+
+        <!-- Панель с номером телефона для мобильной версии -->
+        <div class="phone-panel" id="phone-panel">
+            <p>Позвоните нам: <a href="tel:+71234567890" style="color: white; text-decoration: none;">+7 (123) 456-78-90</a></p>
+        </div>
+
+        <!-- Кнопка телефона для мобильной версии -->
+        <button class="phone-btn" id="phone-btn" onclick="togglePhonePanel()">&#9742;</button>
 
     </div>
 
@@ -301,7 +286,7 @@
                 .catch(error => console.error('Ошибка при загрузке логотипа:', error));
         }
 
-        // Загружаем контакты (только соцсети) из файла contacts.html
+        // Загружаем контакты (номер телефона и соцсети) из файла contacts.html
         function loadContacts() {
             fetch('contacts.html')
                 .then(response => response.text())
@@ -337,6 +322,25 @@
             const menuBtn = document.querySelector('.menu-btn');
             if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
                 sidebar.style.left = '-50%';
+            }
+        });
+
+        // Функция для показа и скрытия панели с номером телефона
+        function togglePhonePanel() {
+            const phonePanel = document.getElementById('phone-panel');
+            if (phonePanel.style.display === 'block') {
+                phonePanel.style.display = 'none';
+            } else {
+                phonePanel.style.display = 'block';
+            }
+        }
+
+        // Закрытие панели с номером телефона при клике на любую часть страницы
+        document.addEventListener('click', function(event) {
+            const phonePanel = document.getElementById('phone-panel');
+            const phoneBtn = document.getElementById('phone-btn');
+            if (!phonePanel.contains(event.target) && !phoneBtn.contains(event.target)) {
+                phonePanel.style.display = 'none';
             }
         });
 
