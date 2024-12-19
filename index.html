@@ -40,10 +40,11 @@
             position: relative;
         }
 
+        /* Логотип и текст */
         .header .logo-container {
             display: flex;
             align-items: center;
-            position: absolute; /* Чтобы логотип и текст были поверх меню */
+            position: absolute; /* Логотип будет поверх меню */
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
@@ -62,10 +63,15 @@
             color: #333;
         }
 
+        /* Контакты (правый верхний угол) */
         .header .contacts {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            position: absolute; /* Контакты будут в правом верхнем углу */
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .header .contacts .phone {
