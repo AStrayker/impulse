@@ -30,7 +30,7 @@
         /* Шапка сайта */
         .header {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Логотип слева, контакты справа */
             align-items: center;
             padding: 10px 20px;
             background-color: #fff;
@@ -38,15 +38,10 @@
             position: relative;
         }
 
-        /* Контейнер для логотипа и описания */
+        /* Контейнер для логотипа */
         .header .logo-container {
             display: flex;
             align-items: center;
-            position: absolute; /* Логотип накладывается на блок меню */
-            left: 20px; /* Позиционирование относительно блока меню */
-            top: 50%;
-            transform: translateY(-50%); /* Центрируем логотип по вертикали */
-            z-index: 10; /* Логотип поверх меню */
         }
 
         .header .logo-container img {
@@ -61,12 +56,11 @@
             color: #333;
         }
 
+        /* Контейнер для контактов */
         .header .contacts {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            position: relative;
-            z-index: 5;
         }
 
         .header .contacts .phone {
@@ -180,8 +174,6 @@
 
             .header .logo-container {
                 margin-left: 60px; /* Сдвиг логотипа вправо от кнопки меню */
-                top: 55%; /* Логотип будет немного выше */
-                transform: translateY(-50%);
             }
 
             .sidebar-pc {
