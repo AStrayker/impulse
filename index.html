@@ -15,6 +15,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
@@ -36,11 +37,16 @@
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            position: relative;
         }
 
         .header .logo-container {
             display: flex;
             align-items: center;
+            position: absolute; /* Чтобы логотип и текст были поверх меню */
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .header .logo-container img {
@@ -96,7 +102,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 1000;
+            z-index: 500;
         }
 
         .sidebar-pc ul {
@@ -203,14 +209,16 @@
         .phone-panel {
             position: fixed;
             bottom: 10px;
-            left: 0;
-            width: 100%;
+            right: -100%;
+            width: 300px;
+            height: 60px;
             background-color: #007bff;
             color: white;
             text-align: center;
-            padding: 10px;
+            line-height: 60px;
             display: none;
             z-index: 2000;
+            transition: right 0.3s ease;
         }
 
         /* Стиль кнопки телефона */
@@ -335,8 +343,10 @@
             const phonePanel = document.getElementById('phone-panel');
             if (phonePanel.style.display === 'block') {
                 phonePanel.style.display = 'none';
+                phonePanel.style.right = '-100%';
             } else {
                 phonePanel.style.display = 'block';
+                phonePanel.style.right = '0';
             }
         }
 
@@ -346,6 +356,7 @@
             const phoneBtn = document.getElementById('phone-btn');
             if (!phonePanel.contains(event.target) && !phoneBtn.contains(event.target)) {
                 phonePanel.style.display = 'none';
+                phonePanel.style.right = '-100%';
             }
         });
 
