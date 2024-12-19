@@ -36,22 +36,21 @@
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 10;
         }
 
-        /* Логотип на блоке меню */
+        /* Контейнер для логотипа и описания */
         .header .logo-container {
-            position: absolute;
-            left: 20px;  /* Позиционирование относительно меню */
-            top: 50%;
-            transform: translateY(-50%);
             display: flex;
             align-items: center;
-            z-index: 5;
+            position: absolute; /* Логотип накладывается на блок меню */
+            left: 20px; /* Позиционирование относительно блока меню */
+            top: 50%;
+            transform: translateY(-50%); /* Центрируем логотип по вертикали */
+            z-index: 10; /* Логотип поверх меню */
         }
 
         .header .logo-container img {
-            width: 50px;  /* Размер логотипа */
+            width: 50px; /* Размер логотипа */
             height: auto;
             margin-right: 10px;
         }
@@ -62,11 +61,12 @@
             color: #333;
         }
 
-        /* Контакты */
         .header .contacts {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            position: relative;
+            z-index: 5;
         }
 
         .header .contacts .phone {
@@ -83,6 +83,14 @@
             font-size: 18px;
             color: #333;
             text-decoration: none;
+        }
+
+        /* Контейнер для основного контента */
+        .main-content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 20px;
+            text-align: center;
         }
 
         /* Меню для ПК */
@@ -172,7 +180,7 @@
 
             .header .logo-container {
                 margin-left: 60px; /* Сдвиг логотипа вправо от кнопки меню */
-                top: 55%; /* Логотип будет выше */
+                top: 55%; /* Логотип будет немного выше */
                 transform: translateY(-50%);
             }
 
@@ -189,7 +197,7 @@
             }
 
             .header .logo-container .logo-text {
-                font-size: 14px;  /* Уменьшаем размер текста логотипа */
+                font-size: 14px; /* Уменьшаем размер текста логотипа */
             }
 
             .sidebar-mobile li a {
@@ -211,7 +219,6 @@
                 margin-left: 250px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -221,11 +228,20 @@
 
         <!-- Шапка сайта -->
         <header class="header">
-            <div class="logo-container" id="logo-container">
-                <!-- Логотип и текст будет загружаться динамически -->
+            <div class="logo-container">
+                <img src="logo.png" alt="Логотип"> <!-- Логотип -->
+                <div class="logo-text">
+                    <div>Интернет Магазин</div>
+                    <div>Ваш лучший выбор</div>
+                </div>
             </div>
-            <div class="contacts" id="contacts-container">
-                <!-- Контактные данные и соц.сети будут загружаться динамически -->
+            <div class="contacts">
+                <div class="phone">+7 (123) 456-78-90</div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank">&#x1F4F1;</a> <!-- Facebook -->
+                    <a href="https://www.instagram.com" target="_blank">&#x1F33F;</a> <!-- Instagram -->
+                    <a href="https://www.twitter.com" target="_blank">&#x1F426;</a> <!-- Twitter -->
+                </div>
             </div>
         </header>
 
@@ -242,11 +258,10 @@
 
         <!-- Кнопка меню (для мобильной версии) -->
         <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
-
     </div>
 
     <script>
-        // Загружаем меню из внешнего файла menu.html
+        // Функция для загрузки меню из внешнего файла menu.html
         function loadMenu() {
             fetch('menu.html')
                 .then(response => response.text())
@@ -257,27 +272,7 @@
                 .catch(error => console.error('Ошибка при загрузке меню:', error));
         }
 
-        // Загружаем логотип и описание из файла logo.html
-        function loadLogo() {
-            fetch('logo.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('logo-container').innerHTML = data;
-                })
-                .catch(error => console.error('Ошибка при загрузке логотипа:', error));
-        }
-
-        // Загружаем контакты (номер телефона и соцсети) из файла contacts.html
-        function loadContacts() {
-            fetch('contacts.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('contacts-container').innerHTML = data;
-                })
-                .catch(error => console.error('Ошибка при загрузке контактов:', error));
-        }
-
-        // Загружаем контент из файла content.html
+        // Функция для загрузки контента из content.html
         function loadContent() {
             fetch('content.html')
                 .then(response => response.text())
@@ -306,10 +301,8 @@
             }
         });
 
-        // Загружаем все данные при загрузке страницы
+        // Загружаем меню и контент при загрузке страницы
         loadMenu();
-        loadLogo();
-        loadContacts();
         loadContent();
     </script>
 
