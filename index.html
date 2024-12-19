@@ -3,183 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интернет магазин</title>
+    <title>Интернет Магазин</title>
+
+    <!-- Иконка сайта (favicon) -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
     <style>
-        /* Общие стили */
-        body {
+        /* Сброс стилей */
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
             font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
         }
 
-        /* Стили для ПК версии */
+        /* Контейнер для основной структуры */
         .container {
             display: flex;
             min-height: 100vh;
+            flex-direction: column;
         }
 
-        .menu {
+        /* Шапка сайта */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo-container img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .header .logo-container .logo-text {
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .header .contacts {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .header .contacts .phone {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .header .contacts .social-icons {
+            margin-top: 5px;
+        }
+
+        .header .contacts .social-icons a {
+            margin-left: 10px;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Контейнер для основного контента */
+        .main-content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Меню */
+        .sidebar-pc {
             width: 250px;
-            background-color: #333;
-            color: white;
-            padding-top: 50px;
+            background-color: white;
+            border-right: 1px solid #ddd;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .sidebar-pc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .sidebar-pc li {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .sidebar-pc li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .sidebar-pc li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+
+        /* Мобильная версия меню */
+        .sidebar-mobile {
             position: fixed;
             top: 0;
-            left: -250px;
+            left: -50%;
+            width: 50%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            z-index: 1000;
             transition: left 0.3s ease;
         }
 
-        .menu.active {
-            left: 0;
-        }
-
-        .menu ul {
+        .sidebar-mobile ul {
             list-style-type: none;
-            padding: 0;
+            padding-left: 0;
+            padding-top: 50px;
         }
 
-        .menu li {
-            padding: 15px 25px;
-            border-bottom: 1px solid #444;
-        }
-
-        .menu li:hover {
-            background-color: #555;
-        }
-
-        .content {
-            flex-grow: 1;
-            margin-left: 250px;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-
-        .logo {
-            font-size: 2em;
+        .sidebar-mobile li {
+            padding: 15px;
             text-align: center;
-            margin-top: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .main-content {
-            text-align: center;
+        .sidebar-mobile li:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Стили для мобильной версии */
+        .sidebar-mobile li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Стиль для кнопки меню */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 2000;
+            display: none;
+        }
+
+        /* Мобильная версия кнопки */
         @media (max-width: 768px) {
-            .menu {
-                left: -100%;
-                width: 50%; /* Ширина меню на половину экрана */
-                height: 100vh; /* Высота меню на весь экран */
-                background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
-                z-index: 99;
-                position: fixed;
-                top: 0;
-                left: -100%;
-                transition: left 0.3s ease;
-            }
-
-            .menu.active {
-                left: 0;
-            }
-
-            .container {
-                flex-direction: column;
-            }
-
-            .content {
-                margin-left: 0;
-            }
-
-            .hamburger {
+            .menu-btn {
                 display: block;
-                position: fixed;
-                top: 20px;
-                left: 20px;
-                background-color: transparent;
-                border: none;
-                z-index: 100;
-                cursor: pointer;
             }
 
-            .hamburger div {
-                width: 35px;
-                height: 5px;
-                background-color: #333;
-                margin: 6px 0;
-                transition: transform 0.3s ease;
+            .header .logo-container {
+                margin-left: 60px; /* Сдвиг логотипа вправо от кнопки меню */
             }
 
-            .hamburger.active div:nth-child(1) {
-                transform: translateY(11px) rotate(45deg);
-            }
-
-            .hamburger.active div:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active div:nth-child(3) {
-                transform: translateY(-11px) rotate(-45deg);
-            }
-
-            .logo {
-                font-size: 1.5em;
-                margin-top: 10px;
+            .sidebar-pc {
+                display: none;
             }
 
             .main-content {
-                margin-top: 100px;
+                margin-left: 0;
             }
         }
+
+        /* ПК версия */
+        @media (min-width: 769px) {
+            .menu-btn {
+                display: none;
+            }
+
+            .sidebar-mobile {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+
+        /* Стиль для панели с номером телефона */
+        .phone-panel {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: none;
+            z-index: 2000;
+        }
+
+        /* Стиль кнопки телефона */
+        .phone-btn {
+            font-size: 24px;
+            color: #333;
+            background-color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- Основной контейнер -->
     <div class="container">
-        <!-- Меню -->
-        <div class="menu" id="menu">
-            <ul>
-                <li>Главная</li>
-                <li>Каталог</li>
-                <li>О нас</li>
-                <li>Контакты</li>
-            </ul>
-        </div>
 
-        <!-- Контент -->
-        <div class="content" id="content">
-            <!-- Гамбургер-меню для мобильной версии -->
-            <button class="hamburger" id="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </button>
-
-            <div class="main-content">
-                <div class="logo">
-                    Логотип магазина
-                </div>
-                <p>Добро пожаловать в наш интернет-магазин!</p>
-                <p>Мы предлагаем самые лучшие товары.</p>
+        <!-- Шапка сайта -->
+        <header class="header">
+            <div class="logo-container" id="logo-container">
+                <!-- Логотип и текст будет загружаться динамически -->
             </div>
+            <div class="contacts" id="contacts-container">
+                <!-- Контактные данные и соц.сети будут загружаться динамически -->
+            </div>
+        </header>
+
+        <!-- Меню для ПК будет загружено из menu.html -->
+        <div class="sidebar-pc" id="menu-container"></div>
+
+        <!-- Основное содержание страницы -->
+        <div class="main-content" id="content-container">
+            <!-- Контент будет загружаться сюда -->
         </div>
+
+        <!-- Мобильная версия меню -->
+        <div class="sidebar-mobile" id="mobile-menu"></div>
+
+        <!-- Кнопка меню (для мобильной версии) -->
+        <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+
+        <!-- Панель с номером телефона для мобильной версии -->
+        <div class="phone-panel" id="phone-panel">
+            <p>Позвоните нам: <a href="tel:+71234567890" style="color: white; text-decoration: none;">+7 (123) 456-78-90</a></p>
+        </div>
+
+        <!-- Кнопка телефона для мобильной версии -->
+        <button class="phone-btn" id="phone-btn" onclick="togglePhonePanel()">&#9742;</button>
+
     </div>
 
     <script>
-        const hamburger = document.getElementById('hamburger');
-        const menu = document.getElementById('menu');
-        const content = document.getElementById('content');
+        // Загружаем меню из внешнего файла menu.html
+        function loadMenu() {
+            fetch('menu.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('menu-container').innerHTML = data;
+                    document.getElementById('mobile-menu').innerHTML = data;
+                })
+                .catch(error => console.error('Ошибка при загрузке меню:', error));
+        }
 
-        // Открыть/закрыть меню при нажатии на гамбургер
-        hamburger.addEventListener('click', function() {
-            menu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
+        // Загружаем логотип и описание из файла logo.html
+        function loadLogo() {
+            fetch('logo.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('logo-container').innerHTML = data;
+                })
+                .catch(error => console.error('Ошибка при загрузке логотипа:', error));
+        }
 
-        // Закрыть меню при нажатии на основную часть сайта
-        content.addEventListener('click', function(event) {
-            if (menu.classList.contains('active') && !menu.contains(event.target) && !hamburger.contains(event.target)) {
-                menu.classList.remove('active');
-                hamburger.classList.remove('active');
+        // Загружаем контакты (номер телефона и соцсети) из файла contacts.html
+        function loadContacts() {
+            fetch('contacts.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contacts-container').innerHTML = data;
+                })
+                .catch(error => console.error('Ошибка при загрузке контактов:', error));
+        }
+
+        // Загружаем контент из файла content.html
+        function loadContent() {
+            fetch('content.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content-container').innerHTML = data;
+                })
+                .catch(error => console.error('Ошибка при загрузке контента:', error));
+        }
+
+        // Функция для открытия и закрытия мобильного меню
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar-mobile');
+            if (sidebar.style.left === '0px') {
+                sidebar.style.left = '-50%';
+            } else {
+                sidebar.style.left = '0';
+            }
+        }
+
+        // Закрытие мобильного меню при клике вне меню
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar-mobile');
+            const menuBtn = document.querySelector('.menu-btn');
+            if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                sidebar.style.left = '-50%';
             }
         });
+
+        // Функция для показа и скрытия панели с номером телефона
+        function togglePhonePanel() {
+            const phonePanel = document.getElementById('phone-panel');
+            if (phonePanel.style.display === 'block') {
+                phonePanel.style.display = 'none';
+            } else {
+                phonePanel.style.display = 'block';
+            }
+        }
+
+        // Закрытие панели с номером телефона при клике на любую часть страницы
+        document.addEventListener('click', function(event) {
+            const phonePanel = document.getElementById('phone-panel');
+            const phoneBtn = document.getElementById('phone-btn');
+            if (!phonePanel.contains(event.target) && !phoneBtn.contains(event.target)) {
+                phonePanel.style.display = 'none';
+            }
+        });
+
+        // Загружаем все данные при загрузке страницы
+        loadMenu();
+        loadLogo();
+        loadContacts();
+        loadContent();
     </script>
+
 </body>
 </html>
