@@ -33,32 +33,32 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 10px 20px; /* Уменьшаем отступы */
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            position: relative; /* Чтобы логотип и описание могли располагаться поверх меню */
+            position: relative;
             transition: padding 0.3s ease;
         }
 
         .header .logo-container {
             display: flex;
             align-items: center;
-            position: absolute; /* Логотип и описание будут "плавать" поверх меню */
+            position: absolute;
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
         }
 
         .header .logo-container img {
-            width: 50px;
+            width: 45px; /* Уменьшаем размер логотипа */
             height: auto;
-            margin-right: 10px;
+            margin-right: 8px;
             transition: width 0.3s ease;
         }
 
         .header .logo-container .logo-text {
-            font-size: 16px;
+            font-size: 14px; /* Уменьшаем размер шрифта текста */
             font-weight: bold;
             line-height: 1.5;
             color: #333;
@@ -72,9 +72,9 @@
         }
 
         .header .contacts .phone {
-            font-size: 16px;
+            font-size: 14px; /* Уменьшаем размер шрифта номера телефона */
             color: #333;
-            display: block; /* В ПК версии будет отображаться */
+            display: block;
         }
 
         .header .contacts .social-icons {
@@ -82,8 +82,8 @@
         }
 
         .header .contacts .social-icons a {
-            margin-left: 10px;
-            font-size: 18px;
+            margin-left: 8px;
+            font-size: 16px;
             color: #333;
             text-decoration: none;
         }
@@ -106,7 +106,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 999; /* Меню всегда будет позади шапки */
+            z-index: 999;
         }
 
         .sidebar-pc ul {
@@ -182,7 +182,7 @@
             }
 
             .header .logo-container {
-                position: absolute; /* Логотип и описание "плавающие" поверх меню */
+                position: absolute;
                 left: 20px;
                 top: 50%;
                 transform: translateY(-50%);
@@ -197,7 +197,7 @@
             }
 
             .header {
-                padding: 10px 15px; /* Уменьшаем отступы на мобильных устройствах */
+                padding: 5px 15px; /* Уменьшаем отступы на мобильных устройствах */
             }
 
             .header .logo-container img {
@@ -205,7 +205,7 @@
             }
 
             .header .logo-container .logo-text {
-                font-size: 14px; /* Уменьшаем размер шрифта для текста логотипа */
+                font-size: 12px; /* Уменьшаем размер шрифта для текста логотипа */
             }
 
             .header .contacts .phone {
@@ -213,7 +213,7 @@
             }
 
             .header .contacts .social-icons a {
-                font-size: 16px; /* Уменьшаем размер иконок соц.сетей */
+                font-size: 14px; /* Уменьшаем размер иконок соц.сетей */
             }
         }
 
@@ -237,20 +237,20 @@
             }
 
             .header .logo-container img {
-                width: 50px; /* Возвращаем исходный размер логотипа */
+                width: 45px; /* Возвращаем исходный размер логотипа */
             }
 
             .header .logo-container .logo-text {
-                font-size: 16px; /* Исходный размер шрифта текста */
+                font-size: 14px; /* Исходный размер шрифта текста */
             }
 
             .header .contacts .phone {
                 display: block; /* Показываем номер телефона в ПК версии */
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .header .contacts .social-icons a {
-                font-size: 18px; /* Исходный размер иконок соц.сетей */
+                font-size: 16px; /* Исходный размер иконок соц.сетей */
             }
         }
 
