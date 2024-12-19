@@ -37,12 +37,17 @@
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            position: relative; /* Чтобы логотип и описание могли располагаться поверх меню */
             transition: padding 0.3s ease;
         }
 
         .header .logo-container {
             display: flex;
             align-items: center;
+            position: absolute; /* Логотип и описание будут "плавать" поверх меню */
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .header .logo-container img {
@@ -64,13 +69,12 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            transition: font-size 0.3s ease;
         }
 
         .header .contacts .phone {
             font-size: 16px;
             color: #333;
-            transition: font-size 0.3s ease;
+            display: block; /* В ПК версии будет отображаться */
         }
 
         .header .contacts .social-icons {
@@ -102,7 +106,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 1000;
+            z-index: 999; /* Меню всегда будет позади шапки */
         }
 
         .sidebar-pc ul {
@@ -178,7 +182,10 @@
             }
 
             .header .logo-container {
-                margin-left: 60px; /* Сдвиг логотипа вправо от кнопки меню */
+                position: absolute; /* Логотип и описание "плавающие" поверх меню */
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
             }
 
             .sidebar-pc {
@@ -202,7 +209,7 @@
             }
 
             .header .contacts .phone {
-                font-size: 14px; /* Уменьшаем размер шрифта телефона */
+                display: none; /* Скрываем номер телефона на мобильных устройствах */
             }
 
             .header .contacts .social-icons a {
@@ -225,7 +232,8 @@
             }
 
             .header .logo-container {
-                margin-left: 0; /* Убираем сдвиг логотипа на больших экранах */
+                position: static; /* Логотип в нормальном положении */
+                margin-left: 0;
             }
 
             .header .logo-container img {
@@ -237,7 +245,8 @@
             }
 
             .header .contacts .phone {
-                font-size: 16px; /* Исходный размер шрифта телефона */
+                display: block; /* Показываем номер телефона в ПК версии */
+                font-size: 16px;
             }
 
             .header .contacts .social-icons a {
