@@ -38,18 +38,21 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 1000;
+            transition: padding 0.3s ease, height 0.3s ease;
         }
 
         /* Логотип и текст */
         .header .logo-container {
             display: flex;
             align-items: center;
+            transition: font-size 0.3s ease, margin-left 0.3s ease;
         }
 
         .header .logo-container img {
             width: 50px;
             height: auto;
             margin-right: 10px;
+            transition: width 0.3s ease;
         }
 
         .header .logo-container .logo-text {
@@ -57,6 +60,7 @@
             font-weight: bold;
             line-height: 1.5;
             color: #333;
+            transition: font-size 0.3s ease;
         }
 
         /* Контакты (правый верхний угол) */
@@ -64,11 +68,13 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            transition: font-size 0.3s ease;
         }
 
         .header .contacts .phone {
             font-size: 16px;
             color: #333;
+            transition: font-size 0.3s ease;
         }
 
         .header .contacts .social-icons {
@@ -186,6 +192,26 @@
             .main-content {
                 margin-left: 0;
             }
+
+            .header {
+                padding: 15px 10px; /* Уменьшаем отступы на маленьких экранах */
+            }
+
+            .header .logo-container img {
+                width: 40px; /* Уменьшаем размер логотипа */
+            }
+
+            .header .logo-container .logo-text {
+                font-size: 14px; /* Уменьшаем размер шрифта для текста логотипа */
+            }
+
+            .header .contacts .phone {
+                font-size: 14px; /* Уменьшаем размер шрифта телефона */
+            }
+
+            .header .contacts .social-icons a {
+                font-size: 16px; /* Уменьшаем размер иконок соц.сетей */
+            }
         }
 
         /* ПК версия */
@@ -200,6 +226,26 @@
 
             .main-content {
                 margin-left: 250px;
+            }
+
+            .header .logo-container {
+                margin-left: 0; /* Убираем сдвиг логотипа на больших экранах */
+            }
+
+            .header .logo-container img {
+                width: 50px; /* Возвращаем исходный размер логотипа */
+            }
+
+            .header .logo-container .logo-text {
+                font-size: 16px; /* Исходный размер шрифта текста */
+            }
+
+            .header .contacts .phone {
+                font-size: 16px; /* Исходный размер шрифта телефона */
+            }
+
+            .header .contacts .social-icons a {
+                font-size: 18px; /* Исходный размер иконок соц.сетей */
             }
         }
 
